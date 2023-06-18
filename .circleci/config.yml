@@ -16,7 +16,31 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Hello, World!"
+          command: "echo Hello, World!\n"
+  say-how_are_u:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "say-how_are_u"
+          command: "echo how are u?\n"
+  say-im_fine:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "say-im_fine"
+          command: "echo i'm fine, thank u\n"
+  say-goodbye:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "say-goodbye"
+          command: "echo goodbye"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -24,3 +48,13 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - say-how_are_u:
+          requires:
+            - say-hello
+      - say-im_fine:
+          requires:
+            - say-how_are_u
+      - say-goodbye:
+          requires:
+            - say-hello
+            - say-im_fine
