@@ -32,7 +32,7 @@ jobs:
       - checkout
       - run:
           name: "say-im_fine"
-          command: "echo i'm fine, thank u\n"
+          command: "echo i am fine, thank u\n"
   say-goodbye:
     docker:
       - image: cimg/base:stable
